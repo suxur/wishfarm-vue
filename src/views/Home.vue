@@ -24,12 +24,13 @@
                                 <p>
                                     <strong>{{ wish.name }}</strong>
                                 </p>
-                                <p>Created: {{ wish.created_at.seconds | getDate }}</p>
-                                <progress
+                                <p>Created: {{ wish.getDate() }}</p>
+                                <el-progress type="circle" :percentage="wish.getPercentage(settings.days_to_grow)" color="#8e71c7"></el-progress>
+                                <!-- <progress
                                     class="progress"
                                     :value="getPercentage(wish.created_at.seconds)"
                                     max="100"
-                                >{{ getPercentage(wish.created_at.seconds) }}%</progress>
+                                >{{ getPercentage(wish.created_at.seconds) }}%</progress> -->
                             </div>
                         </div>
                     </article>
@@ -43,9 +44,9 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import moment from 'moment'
-import WishForm from '../components/WishForm.vue'
+import { mapState } from "vuex";
+import moment from "moment";
+import WishForm from "../components/WishForm.vue";
 
 export default {
     components: {
@@ -53,24 +54,24 @@ export default {
     },
     data() {
         return {
-            name: '',
+            name: "",
             wish: {
-                name: '',
+                name: "",
                 created_at: {
-                    seconds: ''
+                    seconds: ""
                 }
             },
             is_modal_active: false
-        }
+        };
     },
     computed: {
-        ...mapState(['wishes', 'user', 'settings'])
+        ...mapState(["wishes", "user", "settings"])
     },
     methods: {
         addWish() {
-            if (this.name !== '') {
+            if (this.name !== "") {
                 this.$db
-                    .collection('wishes')
+                    .collection("wishes")
                     .add({
                         user_id: this.user.uid,
                         name: this.name,
@@ -79,31 +80,17 @@ export default {
                         created_at: new Date()
                     })
                     .then(ref => {
-                        this.name = ''
+                        this.name = "";
                     })
                     .catch(err => {
-                        console.log(err)
-                    })
+                        console.log(err);
+                    });
             }
         },
         editWish(wish) {
             this.wish = wish;
             this.is_modal_active = true;
-        },
-        getPercentage(val) {
-
-            let created = moment.unix(val)
-            let now = new moment()
-
-            let days = moment.duration(now.diff(created)).asDays()
-
-            return (days / this.settings.days_to_grow) * 100;
-        }
-    },
-    filters: {
-        getDate(val) {
-           return moment.unix(val).fromNow()
         }
     }
-}
+};
 </script>

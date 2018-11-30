@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import { db, auth } from "./firebase";
 import Wish from "./models/Wish";
+import firebase, { UserInfo } from "firebase";
 
 Vue.use(Vuex);
 
@@ -12,14 +13,22 @@ auth.onAuthStateChanged(user => {
     }
 });
 
+let state: {
+    user: UserInfo,
+    wishes: Wish[],
+    settings: {
+        [index:string]: any
+    }
+} = {
+    user: <UserInfo>{},
+    wishes: [],
+    settings: {
+        days_to_grow: <number>30
+    }
+}
+
 const store = new Vuex.Store({
-    state: {
-        user: null,
-        wishes: [],
-        settings: {
-            days_to_grow: <number>30
-        }
-    },
+    state: state,
     mutations: {
         setUser(state, val) {
             state.user = val;
@@ -43,9 +52,10 @@ const store = new Vuex.Store({
                     .where("harvested", "==", false)
                     .orderBy("created_at")
                     .onSnapshot(snapshots => {
-                        let wishes = [];
+                        let wishes: Wish[] = [];
                         snapshots.forEach(function(doc) {
-                            wishes.push(doc.data());
+                            let wish = new Wish(doc.data());
+                            wishes.push(wish);
                         });
                         commit("setWishes", wishes);
                     });

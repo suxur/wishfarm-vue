@@ -1,21 +1,5 @@
 <template>
-    <el-menu
-        default-active="1"
-        class="el-menu-vertical-demo"
-        :router="true"
-        @open="handleOpen"
-        @close="handleClose"
-    >
-        <el-menu-item index="1" route="/">
-            <i class="el-icon-menu"></i>
-            <span>Home</span>
-        </el-menu-item>
-        <el-menu-item index="2" route="/settings">
-            <i class="el-icon-setting"></i>
-            <span>Settings</span>
-        </el-menu-item>
-    </el-menu>
-    <!-- <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
                 <img src="../assets/logo-flat.png" width="112" height="28">
@@ -34,9 +18,6 @@
             </a>
         </div>
         <div class="navbar-menu" :class="{ 'is-active': active }">
-            <div class="navbar-start">
-                <router-link to="/" class="navbar-item">Home</router-link>
-            </div>
             <div class="navbar-end">
                 <div class="navbar-item has-dropdown is-hoverable">
                     <a class="navbar-link">
@@ -62,7 +43,7 @@
                 <div class="navbar-item"></div>
             </div>
         </div>
-    </nav> -->
+    </nav>
 </template>
 
 <script>
@@ -105,9 +86,6 @@ export default {
         .image {
             margin-right: 10px;
         }
-    }
-    .el-menu-vertical-demo {
-        height: 100%;
     }
 </style>
 
