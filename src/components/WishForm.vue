@@ -1,6 +1,7 @@
 <template>
     <div>
-        <div class="box">
+        <el-input v-model="wish.name"></el-input>
+        <!-- <div class="box">
             <div class="media-content">
                 <div class="content">
                     <div class="field">
@@ -23,7 +24,7 @@
                     >{{ getPercentage(wish.created_at.seconds) }}%</progress>
                 </div>
             </div>
-        </div>
+        </div> -->
     </div>
 </template>
 

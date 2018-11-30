@@ -2,7 +2,10 @@
     <div>
         <div class="container">
             <section class="section">
-                <div class="field has-addons">
+                <el-input placeholder="Please input" v-model="input5">
+                    <el-button slot="append" icon="el-icon-plus">Add Wish</el-button>
+                </el-input>
+                <!-- <div class="field has-addons">
                     <div class="control is-expanded">
                         <input
                             class="input"
@@ -14,7 +17,7 @@
                     <div class="control">
                         <a class="button is-info" @click="addWish">Add Wish</a>
                     </div>
-                </div>
+                </div> -->
             </section>
             <section class="section">
                 <div v-if="wishes.length">
@@ -35,9 +38,12 @@
                         </div>
                     </article>
                 </div>
-                <b-modal :active.sync="is_modal_active">
+                <el-dialog
+                    title="Edit Wish"
+                    :visible.sync="is_modal_active"
+                >
                     <WishForm :wish="wish"/>
-                </b-modal>
+                </el-dialog>
             </section>
         </div>
     </div>
