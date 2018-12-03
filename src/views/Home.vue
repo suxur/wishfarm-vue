@@ -1,13 +1,16 @@
 <template>
-  <el-container>
-    <el-header>
-      <el-input placeholder="I wish I had..." v-model="name" @keyup.enter.native="addWish">
-        <el-button slot="append" icon="el-icon-plus" @click="addWish">Add Wish</el-button>
-      </el-input>
-    </el-header>
-    <el-main>
-      <el-tabs>
-        <el-tab-pane label="Growing">
+        <div class="container">
+            <section class="section">
+    <b-field>
+        <b-input
+            placeholder="I wish I had..."
+            :value="name"
+            @keyup.enter.native="addWish"
+        ></b-input>
+        <p class="control">
+            <button class="button">Add Wish</button>
+        </p>
+    </b-field>
           <div v-if="wishes.length">
             <article v-for="wish in wishes" :key="wish.name" @click="editWish(wish)">
               <Wish :wish="wish"></Wish>
@@ -16,11 +19,8 @@
           <el-dialog title="Edit Wish" :visible.sync="is_modal_active">
             <WishForm :wish="wish"/>
           </el-dialog>
-        </el-tab-pane>
-        <el-tab-pane label="Harvest"></el-tab-pane>
-      </el-tabs>
-    </el-main>
-  </el-container>
+</section>
+        </div>
 </template>
 
 <script>

@@ -1,15 +1,9 @@
 <template>
-  <el-card shadow="hover">
-    <p>
-      <strong>{{ wish.name }}</strong>
-    </p>
+  <div class="box">
+    <p class="title is-5">{{ wish.name }}</p>
     <p>Created: {{ wish.getDate() }}</p>
-    <el-progress
-      type="circle"
-      :percentage="wish.getPercentage(settings.days_to_grow)"
-      color="#8e71c7"
-    ></el-progress>
-  </el-card>
+    <progress class="progress is-primary" :value="wish.getPercentage(settings.days_to_grow)" max="100"></progress>
+  </div>
 </template>
 
 <script>
@@ -21,4 +15,10 @@ export default {
   }
 };
 </script>
+
+<style lang="sass" scoped>
+    .box
+        margin-bottom: 15px
+</style>
+
 

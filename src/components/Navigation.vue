@@ -1,15 +1,5 @@
 <template>
-  <el-menu default-active="1" class="el-menu-vertical-demo" :router="true">
-    <el-menu-item index="1" route="/">
-      <i class="el-icon-menu"></i>
-      <span>Home</span>
-    </el-menu-item>
-    <el-menu-item index="2" route="/settings">
-      <i class="el-icon-setting"></i>
-      <span>Settings</span>
-    </el-menu-item>
-  </el-menu>
-  <!-- <nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+    <nav class="navbar is-dark is-fixed-top" role="navigation" aria-label="main navigation">
         <div class="navbar-brand">
             <a class="navbar-item" href="https://bulma.io">
                 <img src="../assets/logo-flat.png" width="112" height="28">
@@ -56,7 +46,7 @@
                 <div class="navbar-item"></div>
             </div>
         </div>
-  </nav>-->
+    </nav>
 </template>
 
 <script>
@@ -64,45 +54,42 @@ import { mapState } from "vuex";
 import md5 from "blueimp-md5";
 
 export default {
-  data() {
-    return {
-      active: false
-    };
-  },
-  computed: {
-    ...mapState(["user"]),
-    image() {
-      return "https://gravatar.com/avatar/" + md5(this.user.email);
-    }
-  },
-  methods: {
-    toggle() {
-      this.active = !this.active;
+    data() {
+        return {
+            active: false
+        };
     },
-    logout() {
-      this.$auth
-        .signOut()
-        .then(() => {
-          this.$store.dispatch("clear");
-          this.$router.push("/login");
-        })
-        .catch(err => {
-          console.log(err);
-        });
+    computed: {
+        ...mapState(["user"]),
+        image() {
+            return "https://gravatar.com/avatar/" + md5(this.user.email);
+        }
+    },
+    methods: {
+        toggle() {
+            this.active = !this.active;
+        },
+        logout() {
+            this.$auth
+                .signOut()
+                .then(() => {
+                    this.$store.dispatch("clear");
+                    this.$router.push("/login");
+                })
+                .catch(err => {
+                    console.log(err);
+                });
+        }
     }
-  }
 };
 </script>
 
 <style lang="scss" scoped>
-.navbar-link {
-  .image {
-    margin-right: 10px;
-  }
-}
-.el-menu-vertical-demo {
-  height: 100%;
-}
+    .navbar-link {
+        .image {
+            margin-right: 10px;
+        }
+    }
 </style>
 
 
